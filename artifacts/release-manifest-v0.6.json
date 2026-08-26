@@ -1,0 +1,144 @@
+{
+  "candidate": "Obligation-Bound Policy Admission Lab v0.6",
+  "claim_ceiling": "Local bounded-harness evidence only; not safety, legitimacy, production-readiness or global non-bypassability.",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "2c34fa265d16fb46059c442d360fd02bab447f309747124bb382d74c9ae38b0d",
+      "size": 103
+    },
+    {
+      "path": "BREAK_IT.md",
+      "sha256": "6e5e5ac7a2485c304478dab05b9b443cdf79243b27ef72e17e1d9e636207508e",
+      "size": 1973
+    },
+    {
+      "path": "CLAIMS.md",
+      "sha256": "f5dfa286bf2b1ffe6be0f43152331fc4497d2f4a0fd1058c3b9e9a5454cb57ed",
+      "size": 1091
+    },
+    {
+      "path": "PUBLIC_POST.md",
+      "sha256": "ab80f32390de6f60b1b5aa0ed876db2556c682a8b4b7daaf10cad4e7e64c086c",
+      "size": 1075
+    },
+    {
+      "path": "README.md",
+      "sha256": "914ce1b5fe17c4c603efcc06e357ccf16a78a0202840842fefcf4e53928e2b79",
+      "size": 3606
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "55c692e0c15facb8409709a64bebca4635d37b46fc6838e37a5ffcb0a0d55a2b",
+      "size": 832
+    },
+    {
+      "path": "artifacts/test-run-v0.6.json",
+      "sha256": "58e90b52764df83e5c7afc1745680a6df96dd6bd0ceffae37a90a6d64407df67",
+      "size": 26917
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "593fdcf4b121635d1996b12f60b59eae562f500e5520da603520949b9a5e679f",
+      "size": 435
+    },
+    {
+      "path": "scripts/build_manifest.py",
+      "sha256": "88d7eec7fb044816ac7249622344251fe32147a2dcc968c78c734d51bf65c81d",
+      "size": 2779
+    },
+    {
+      "path": "scripts/verify_manifest.py",
+      "sha256": "6847726339765ec5a54d990fc468fe8694dd3a44752cba36f32c44c51801432f",
+      "size": 2012
+    },
+    {
+      "path": "spec/INTERFACES.md",
+      "sha256": "b84a5c71156f2a810087b32a1dcd8efcf825aa6cbf7f976c7638567a375c1874",
+      "size": 4602
+    },
+    {
+      "path": "spec/attack-register.json",
+      "sha256": "90f3ab3a3521bfbd9fa1d9ba774805ecbf2e38860d6761bc167fb236610af59a",
+      "size": 18774
+    },
+    {
+      "path": "spec/source-lock.json",
+      "sha256": "6797a70f35deb153e1971d4c024f726584dda0148a01549ba4a7abf54b972e72",
+      "size": 1254
+    },
+    {
+      "path": "src/obpa_lab/__init__.py",
+      "sha256": "c62b3c6bd04bee7425e0df840cf14b7ec547b4f12027d968922860016ffc9bad",
+      "size": 394
+    },
+    {
+      "path": "src/obpa_lab/canonical.py",
+      "sha256": "1ac0fb7531c4b77ce80438d9369f7ed2cfb02651b04da7fb27711aa9c39b5fa6",
+      "size": 1625
+    },
+    {
+      "path": "src/obpa_lab/cli.py",
+      "sha256": "ae45e8caf3b2f82771f2bd07b1fede7a7379cc4207b37f4b0e69c08d8879896c",
+      "size": 3042
+    },
+    {
+      "path": "src/obpa_lab/crypto.py",
+      "sha256": "fa9bf67965850bfd43aea8bade2267b72ad6086797432508c67b9ad4bec583f6",
+      "size": 1249
+    },
+    {
+      "path": "src/obpa_lab/harness.py",
+      "sha256": "f2a9a0ff9f7afa9299d294519ebf552d07675d059fc789039ff7e003b445b691",
+      "size": 46106
+    },
+    {
+      "path": "src/obpa_lab/model.py",
+      "sha256": "6a1a9f4ca9df4657a86daa2ac64546ec306084333e453acd1df877c98ab2d624",
+      "size": 9952
+    },
+    {
+      "path": "src/obpa_lab/registry.py",
+      "sha256": "2cc75421232cb761ab5d3ce2dec98983e9113d31bc830d119e790e235063f67b",
+      "size": 740
+    },
+    {
+      "path": "src/obpa_lab/scenarios.py",
+      "sha256": "99b091dde4a3c8fe3ff8d9ab866e1cd9b7733653e52a13422dc8c8be28452d2d",
+      "size": 14513
+    },
+    {
+      "path": "src/obpa_lab/types.py",
+      "sha256": "90f8a622898ebf36e6859a061419fa477b73295198b4b5d763ce195b1db9c6d4",
+      "size": 4987
+    },
+    {
+      "path": "tests/test_attack_register.py",
+      "sha256": "6ca0f31e4e81af1d1a1223c810717b9ba4117494febe8a6e11d442094e834cce",
+      "size": 2106
+    },
+    {
+      "path": "tests/test_controls.py",
+      "sha256": "4fb950993e8a3effa22f99ca4443074f638f31ce31ccc7b56f43dfcd62b07f08",
+      "size": 940
+    }
+  ],
+  "generated_at": "2026-08-26T20:35:48.903158Z",
+  "publication": "https://github.com/LalaSkye/obligation-bound-policy-admission-lab",
+  "python": "3.12.13",
+  "schema_version": "1.0",
+  "source_candidate_sha256": "3af7e1abbaa8378d56f59799484ee0ae030c4a88bdbf87895e781a8d13301468",
+  "source_tree_digest": "bbb650a0933fe851d3c83c6023b05c6ac22ca8e1fdbd00b97ff7e82f1aa2362f",
+  "status": "PUBLIC_RELEASE",
+  "test_report": {
+    "path": "artifacts/test-run-v0.6.json",
+    "sha256": "58e90b52764df83e5c7afc1745680a6df96dd6bd0ceffae37a90a6d64407df67",
+    "summary": {
+      "attacks_failed": 0,
+      "attacks_passed": 59,
+      "attacks_total": 59,
+      "checker_disabled_control_passed": true,
+      "positive_control_passed": true
+    }
+  }
+}

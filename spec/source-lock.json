@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "candidate": {
+    "name": "Obligation-Bound Policy Admission Lab v0.6",
+    "sha256": "3af7e1abbaa8378d56f59799484ee0ae030c4a88bdbf87895e781a8d13301468"
+  },
+  "attack_ranges": [
+    {
+      "from": 1,
+      "to": 20,
+      "source": "External Landscape Pass - The Policy Legitimacy Operator",
+      "sha256": "0b3a25928b978d07d9ab9a731ce75d5815e66dd2c896b39d774ab2b1fd64163f"
+    },
+    {
+      "from": 21,
+      "to": 40,
+      "source": "Obligation-Bound Policy Admission Lab Proposal v0.3",
+      "sha256": "8d4a76f6e4750a5a440de63d7876e71b7d4f3dde62ea72cc7f0ff175ef46a728"
+    },
+    {
+      "from": 41,
+      "to": 54,
+      "source": "Obligation-Bound Policy Admission Lab Final Candidate v0.4",
+      "sha256": "c752066b2275360b147bcc2988e35696ee4c63c5d7856a7c78b23cb2fc60841b"
+    },
+    {
+      "from": 55,
+      "to": 57,
+      "source": "Obligation-Bound Policy Admission Lab Final Candidate v0.5",
+      "sha256": "c58f221eed6c4aa5ad714ccd167448f7eab7c47ccc950178f6646d5a918eff67"
+    },
+    {
+      "from": 58,
+      "to": 59,
+      "source": "Obligation-Bound Policy Admission Lab Build-Release Candidate v0.6",
+      "sha256": "3af7e1abbaa8378d56f59799484ee0ae030c4a88bdbf87895e781a8d13301468"
+    }
+  ]
+}

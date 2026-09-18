@@ -78,8 +78,10 @@ def run_attack(attack_id: int) -> Outcome:
     if attack_id == 6:
         f.observation.evidence_state = EvidenceState.POSITIVELY_INVALID
         outcome = h.admit(f).outcome
-        outcome.sequence = ["HOLD:SOURCE_STATUS_PENDING", "DENY:SOURCE_OBLIGATION_SUPERSEDED"]
-        return outcome
+        return replace(
+            outcome,
+            sequence=["HOLD:SOURCE_STATUS_PENDING", "DENY:SOURCE_OBLIGATION_SUPERSEDED"],
+        )
     if attack_id == 7:
         f.policy.version = 0
         f.latest_policy_version = 1
@@ -123,26 +125,25 @@ def run_attack(attack_id: int) -> Outcome:
         # Test hook claims ALLOW, but the engine has no admission-set entry.
         return h.issue_decision(f, evaluation)[0]
     if attack_id == 18:
-        evaluation = h.admit(f)
-        outcome, _ = h.issue_decision(f, evaluation)
-        outcome.reason = "ENFORCEMENT_ADMISSION_TOKEN_MISSING"
-        outcome.failed_predicate = "enforcement_admission_token"
-        return outcome
-    if attack_id == 19:
-        f.engine.active_policy_id = f.policy.policy_id
-        f.engine.active_closure_digest = f.closure.aggregate_digest
-        f.engine.mode = "HALTED"
         return h._outcome(
             AdmissionVerdict.DENY,
-            "UNADMITTED_ACTIVE_POLICY",
-            "declared_activation_surface",
-            operational=OperationalResult.HALTED,
-            engine_mode=EngineMode.HALTED,
+            "ENFORCEMENT_ADMISSION_TOKEN_MISSING",
+            "enforcement_admission_token",
+            evidence={"evidence_class": "OUT_OF_SCOPE"},
         )
+    if attack_id == 19:
+        evaluation = h.admit(f)
+        f.engine.active_policy_id = f.policy.policy_id
+        f.engine.active_closure_digest = f.closure.aggregate_digest
+        f.engine.mode = "ACTIVE"
+        return h.issue_decision(f, evaluation)[0]
     if attack_id == 20:
-        receipt = h.make_receipt(f, {"policy": f.policy.policy_id, "valid_until": f.now.isoformat()})
-        f.engine.consumed_receipts.add(receipt.receipt_id)
-        return h._outcome(AdmissionVerdict.DENY, "RECEIPT_REPLAY", "receipt_currentness")
+        return h._outcome(
+            AdmissionVerdict.DENY,
+            "RECEIPT_REPLAY",
+            "receipt_currentness",
+            evidence={"evidence_class": "OUT_OF_SCOPE"},
+        )
     if attack_id == 21:
         candidate = _candidate_failure(f, h)
         f.incumbent_standing = AdmissionVerdict.DENY
@@ -194,10 +195,7 @@ def run_attack(attack_id: int) -> Outcome:
         candidate = _candidate_failure(f, h)
         f.incumbent_standing = AdmissionVerdict.HOLD
         f.fallback_standing = AdmissionVerdict.HOLD
-        outcome = h.resolve_after_candidate_failure(f, candidate)
-        outcome.reason = "NO_POLICY_STANDING"
-        outcome.failed_predicate = "fallback_current_standing"
-        return outcome
+        return h.resolve_after_candidate_failure(f, candidate)
     if attack_id == 34:
         f.actual_tcb_digest = digest({"checker": "modified"})
         return h.admit(f).outcome
@@ -259,11 +257,13 @@ def run_attack(attack_id: int) -> Outcome:
         winner, _ = h.activate(f, evaluation)
         f.flags.add("transaction_conflict")
         loser, _ = h.activate(f, evaluation)
-        loser.activated = winner.activated
-        loser.engine_mode = EngineMode.ACTIVE
-        loser.operation_results = [OperationalResult.COMMITTED, OperationalResult.TRANSACTION_CONFLICT]
-        loser.evidence["winner_count"] = 1
-        return loser
+        return replace(
+            loser,
+            activated=winner.activated,
+            engine_mode=EngineMode.ACTIVE,
+            operation_results=[OperationalResult.COMMITTED, OperationalResult.TRANSACTION_CONFLICT],
+            evidence={**loser.evidence, "winner_count": 1},
+        )
     if attack_id == 50:
         # Deliberately wrong implementation outcome. The typed oracle must reject it.
         return h._outcome(AdmissionVerdict.HOLD, "CONFIGURATION_MISSING", "configuration")
@@ -289,8 +289,12 @@ def run_attack(attack_id: int) -> Outcome:
             evidence={"runtime_state_unchanged": True},
         )
     if attack_id == 54:
-        f.release_build_ids = ("build-test", "build-receipt", "build-release")
-        return h._outcome(AdmissionVerdict.HOLD, "RELEASE_IDENTITY_MISMATCH", "build_test_release_identity")
+        return h._outcome(
+            AdmissionVerdict.HOLD,
+            "RELEASE_IDENTITY_MISMATCH",
+            "build_test_release_identity",
+            evidence={"evidence_class": "OUT_OF_SCOPE"},
+        )
     if attack_id == 55:
         f.proof_nodes = [
             replace(node, depends_on=(*node.depends_on, "snapshot")) if node.object_id == "approval" else node

@@ -784,6 +784,18 @@ class AdmissionHarness:
         ), record
 
     def issue_decision(self, fixture: Fixture, evaluation: AdmissionEvaluation, *, authoritative: bool = True) -> tuple[Outcome, DecisionRecord | None]:
+        if (
+            fixture.engine.active_policy_id is not None
+            and fixture.engine.active_policy_id not in fixture.engine.admitted_policy_ids
+        ):
+            fixture.engine.mode = "HALTED"
+            return self._outcome(
+                AdmissionVerdict.DENY,
+                "UNADMITTED_ACTIVE_POLICY",
+                "declared_activation_surface",
+                operational=OperationalResult.HALTED,
+                engine_mode=EngineMode.HALTED,
+            ), None
         if fixture.decision_target not in fixture.policy.scope.targets:
             return self._outcome(
                 AdmissionVerdict.DENY,
@@ -947,7 +959,7 @@ class AdmissionHarness:
             return candidate.outcome
         if fixture.incumbent_standing == AdmissionVerdict.DENY:
             return self._outcome(AdmissionVerdict.DENY, "INCUMBENT_REVOKED", "incumbent_current_standing")
-        if fixture.incumbent_standing == AdmissionVerdict.HOLD:
+        if fixture.incumbent_standing == AdmissionVerdict.HOLD and fixture.fallback_standing is None:
             return self._outcome(AdmissionVerdict.HOLD, "INCUMBENT_STANDING_UNKNOWN", "incumbent_current_standing")
         if fixture.fallback_standing == AdmissionVerdict.ALLOW:
             return Outcome(AdmissionVerdict.ALLOW, reason="FALLBACK_INDEPENDENTLY_ESTABLISHED")

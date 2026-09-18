@@ -1,0 +1,55 @@
+name: v0.7 successor candidate
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "spec/**"
+      - "pyproject.toml"
+      - ".github/workflows/v07-successor-candidate.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  successor-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install candidate
+        run: python -m pip install -e .
+
+      - name: Run full test suite
+        run: python -m unittest discover -s tests -v
+
+      - name: Generate successor report
+        run: python -m obpa_lab.cli run --output /tmp/test-run-v0.7.json
+
+      - name: Verify evidence-class counts
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = json.loads(Path("/tmp/test-run-v0.7.json").read_text())
+          expected = {
+              "ENGINE_DERIVED": 55,
+              "META_TEST": 1,
+              "OUT_OF_SCOPE": 3,
+              "UNIMPLEMENTED_CANDIDATE": 0,
+          }
+          actual = report["summary"]["evidence_classes"]
+          assert actual == expected, (actual, expected)
+          assert report["summary"]["attacks_failed"] == 0, report["summary"]
+          assert report["summary"]["positive_control_passed"] is True
+          assert report["summary"]["checker_disabled_control_passed"] is True
+          PY

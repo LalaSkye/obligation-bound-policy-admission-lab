@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "obligation-bound-policy-admission-lab"
-version = "0.6.0"
+version = "0.7.0.dev0"
 description = "A bounded, attackable reference harness for obligation-bound policy admission."
 readme = "README.md"
 requires-python = ">=3.11"

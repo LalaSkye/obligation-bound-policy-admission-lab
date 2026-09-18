@@ -1,0 +1,36 @@
+{
+  "base_sha": "0ac95d3439cf4ef79d2dc6873680c4be93cd0850",
+  "branch": "v0.7/attack-oracle-integrity",
+  "candidate": "v0.7-successor-candidate",
+  "claim_limit": "This receipt records one successful GitHub Actions verification of the named successor-candidate source SHA and PR merge ref. It does not release v0.7, rewrite v0.6, establish production readiness, safety, legitimacy, global non-bypassability, or make OUT_OF_SCOPE cases engine-derived.",
+  "pull_request": 3,
+  "receipt_hash": "sha256:577ddbd4495278c1e56986cfb78ccb45d5ad4aa9780941846ceca5b50c7faa42",
+  "repository": "LalaSkye/obligation-bound-policy-admission-lab",
+  "runner": {
+    "os": "ubuntu-24.04",
+    "python": "3.12.14"
+  },
+  "schema_version": "1.0",
+  "verification": {
+    "checker_disabled_control_passed": true,
+    "evidence_classes": {
+      "ENGINE_DERIVED": 55,
+      "META_TEST": 1,
+      "OUT_OF_SCOPE": 3,
+      "UNIMPLEMENTED_CANDIDATE": 0
+    },
+    "install": "python -m pip install -e .",
+    "positive_control_passed": true,
+    "report_command": "python -m obpa_lab.cli run --output /tmp/test-run-v0.7.json",
+    "report_exit": 0,
+    "test_command": "python -m unittest discover -s tests -v",
+    "tests_failed": 0,
+    "tests_passed": 67,
+    "tests_run": 67
+  },
+  "verified_at_utc": "2026-09-18T19:57:46Z",
+  "verified_head_sha": "bfd3bef14229616cc7df042957834b49356ab86e",
+  "verified_merge_sha": "3c70e5528db40496b9d6ac6eccb4f014a57d0de9",
+  "workflow_job_id": 105742072418,
+  "workflow_run_id": 35388809466
+}

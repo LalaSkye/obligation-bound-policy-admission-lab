@@ -50,7 +50,15 @@ class PredicateTrace:
     evidence_state: EvidenceState | None = None
 
 
-@dataclass
+EVIDENCE_CLASSES = frozenset({
+    "ENGINE_DERIVED",
+    "META_TEST",
+    "OUT_OF_SCOPE",
+    "UNIMPLEMENTED_CANDIDATE",
+})
+
+
+@dataclass(frozen=True)
 class Outcome:
     admission: AdmissionVerdict
     operational: OperationalResult = OperationalResult.NOT_ATTEMPTED
@@ -83,6 +91,7 @@ class AttackSpec:
     committed: bool
     engine_modes: tuple[EngineMode, ...]
     oracle_mode: str = "MATCH"
+    evidence_class: str = "ENGINE_DERIVED"
 
     @classmethod
     def from_mapping(cls, raw: dict[str, Any]) -> "AttackSpec":
@@ -104,6 +113,7 @@ class AttackSpec:
             committed=bool(raw.get("committed", False)),
             engine_modes=many(EngineMode, "engine_modes"),
             oracle_mode=str(raw.get("oracle_mode", "MATCH")),
+            evidence_class=str(raw.get("evidence_class", "ENGINE_DERIVED")),
         )
 
 
